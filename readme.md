@@ -25,7 +25,7 @@ php artisan migrate
 Налаштувати Telegram Бота<br />
 
 `BOTMAN_TELEGRAM_TOKEN= токен бота
-BOTMAN_TELEGRAM_WEBHOOK= веб хук бота`
+BOTMAN_TELEGRAM_WEBHOOK= веб хук бота наприклад https://89ccd711.ngrok.io/webhooks/telegram`
 
 Встановити вебхук<br />
 
