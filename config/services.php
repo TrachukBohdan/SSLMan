@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    
+    'botman' => [
+        'telegram_token' => env('BOTMAN_TELEGRAM_TOKEN'),
+    ],
 
 ];
