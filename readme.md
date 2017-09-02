@@ -1,9 +1,9 @@
-##Встановлення
+**Встановлення**
 
-Встановити бібліотеки
+Встановити бібліотеки <br />
 `composer install`
 
-Налаштувати зєдняння із базою (.env)
+Налаштувати зєдняння із базою (.env) <br />
 `
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -13,20 +13,20 @@ DB_USERNAME=root
 DB_PASSWORD=
 `
 
-Запустити міграції
+Запустити міграції <br />
 `
 php artisan migrate
 `
 
-Щоб підлючити телегамовські веб хуки потрібно створити публічний https адрес
+Щоб підлючити телегамовські веб хуки потрібно створити публічний https адрес <br />
 `ngrok http --host-header=rewrite {domain}:80`
-де `{domain}` локальний адрес 
+де `{domain}` локальний адрес  <br />
 
-Налаштувати Telegram Бота
+Налаштувати Telegram Бота<br />
 
 `BOTMAN_TELEGRAM_TOKEN= токен бота
 BOTMAN_TELEGRAM_WEBHOOK= веб хук бота`
 
-Встановити вебхук
+Встановити вебхук<br />
 
 `php artisan sllman:set-webhook`
