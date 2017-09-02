@@ -6,6 +6,8 @@ use App\Subscriber;
 use Illuminate\Http\Request;
 use Mpociot\BotMan\BotMan;
 use App\Http\Controllers\Controller;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+use Spatie\SslCertificate\SslCertificate;
 
 /**
  * Class TelegramController
@@ -108,8 +110,29 @@ class TelegramController extends Controller
      */
     private function sslInfo()
     {
-        $this->botman->hears('ssl-info {domain}', function(BotMan $bot) {
-            $bot->reply('status: subscribed');
+        $this->botman->hears('ssl-info {domain}', function(BotMan $bot, $domain) {
+
+            $domainInfoMsg = '';
+
+            try
+            {
+                $certificate = SslCertificate::createForHostName($domain);
+                $domainInfo['valid'] = $certificate->isValid() ? 'yes' : 'no';
+                $domainInfo['issuer'] = $certificate->getIssuer();
+                $domainInfo['exp-data'] = $certificate->expirationDate();
+                $domainInfo['sig-algorithm'] = $certificate->getSignatureAlgorithm();
+
+                foreach($domainInfo as $propertyName => $propertyValue)
+                {
+                    $domainInfoMsg .= "\n{$propertyName}: \t $propertyValue";
+                }
+            }
+            catch(CouldNotDownloadCertificate $e)
+            {
+                $domainInfoMsg = 'Error: check the domain please';
+            }
+
+            $bot->reply($domainInfoMsg);
         });
     }
 }
