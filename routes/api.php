@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('publish-message', 'MessageController@publishMessage');
+Route::post('publish-message', 'MessageController@publishMessage');

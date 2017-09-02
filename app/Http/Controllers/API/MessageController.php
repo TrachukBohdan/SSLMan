@@ -14,10 +14,20 @@ use Spatie\SslCertificate\SslCertificate;
 
 class MessageController extends Controller
 {
-    public function publishMessage()
+
+    public function publishMessage(Request $request)
     {
-      
         $botman = app('botman');
-        $botman->say('Message', 112829685, TelegramDriver::class);
+
+        $telegramUsers = Subscriber::all();
+
+        foreach($telegramUsers as $telegramUser)
+        {
+            $botman->say($request->message, $telegramUser->telegram_user_id, TelegramDriver::class);
+        }
+
+        return response()->json([
+            'ok' => true
+        ]);
     }
 }
